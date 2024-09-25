@@ -12,18 +12,19 @@ import eval as submission
 
 
 def main():
-    csv_file = "/home/arrma/programms/NTO_2024-25/first_stage/engineering_tour/2_task/annotations.csv"
-    data = pd.read_csv(csv_file, sep=',')
+    csv_file = "annotations.csv"
+    data = pd.read_csv(csv_file, sep=';')
     data = data.sample(frac=1)
 
     correct = 0
     for row in data.itertuples():
-        _, image_filename, answer = row
-        answer = (answer == 'yes')
+        _, image_filename1, image_filename2, answer, reason = row
+        answer = (answer == 'equal')
 
-        image = cv2.imread("/home/arrma/programms/NTO_2024-25/first_stage/engineering_tour/2_task/"+image_filename)
+        image1 = cv2.imread(image_filename1)
+        image2 = cv2.imread(image_filename2)
 
-        user_answer = submission.predict_ability_capture(image)
+        user_answer = submission.is_same_stars(image1, image2)
         if user_answer == answer:
             correct += 1
 

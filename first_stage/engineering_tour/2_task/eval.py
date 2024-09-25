@@ -21,8 +21,9 @@ def processing_red_cube(hsv_image, image):
             max_area = area
             x, y, w, h = cv2.boundingRect(contour)  # Получаем координаты и размеры
 
-    # cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
-    
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    # cv2.imshow("red", image)
+    # cv2.waitKey(0)
     return x,y,w,h
     
 
@@ -82,7 +83,9 @@ def size_comparison(hsv_image, image):
         if not ((x1 < x_cube_mid < x2 ) and (y1 < y_cube_mid < y2)):
             x_obj, y_obj, w_obj, h_obj = coord
 
-    # cv2.rectangle(image, (x_obj, y_obj), (x_obj + w_obj, y_obj + h_obj), (0, 255, 0), 2)
+    cv2.rectangle(image, (x_obj, y_obj), (x_obj + w_obj, y_obj + h_obj), (0, 255, 0), 2)
+    cv2.imshow("image", image)
+    cv2.waitKey(0)
 
     if w_obj is None and h_obj is None:
         return True
@@ -93,7 +96,7 @@ def size_comparison(hsv_image, image):
 
 
 def predict_ability_capture(image) -> bool:
-    # image = cv2.resize(image, (1280, 720))
+    image = cv2.resize(image, (1280, 720))
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
     result = size_comparison(hsv_image, image)
