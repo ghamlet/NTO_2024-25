@@ -12,7 +12,7 @@ import eval as submission
 
 
 def main():
-    csv_file = "annotations.csv"
+    csv_file = "first_stage/engineering_tour/3_task/annotations.csv"
     data = pd.read_csv(csv_file, sep=',')
     data = data.sample(frac=1)
 
@@ -23,7 +23,7 @@ def main():
         _, image_filename, answer = row
         answer = int(answer)
 
-        image = cv2.imread(image_filename)
+        image = cv2.imread("first_stage/engineering_tour/3_task/"+image_filename)
         user_answer = submission.predict_connect_number(image, tools_list)
         if user_answer == answer:
             correct += 1
