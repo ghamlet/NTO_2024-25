@@ -48,7 +48,7 @@ def check_need_connection(image: np.ndarray):
             # cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
             charging_connectors.append([x, y, w, h])
 
-    sort_charging_connectors = sorted(charging_connectors, key=lambda x: x[0])
+    sort_charging_connectors = sorted(charging_connectors, key = lambda list_: list_[0])
     #сортируем контуры по возрастанию координаты x 
 
     # cv2.imshow("gray_image", gray_copy)
@@ -145,7 +145,7 @@ def predict_connect_number(image, img_list) -> int:
                         right_number = i+1
                         return right_number
         
-                        cv2.putText(image, str(i+1), (x, y),   cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
+                        # cv2.putText(image, str(i+1), (x, y),   cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2) 
 
     except:
         pass
