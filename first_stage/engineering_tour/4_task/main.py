@@ -26,15 +26,17 @@ def main():
         image2 = cv2.imread("first_stage/engineering_tour/4_task/" + image_filename2)
 
 
-
-        # cv2.imshow("galaxy_1", image1)
-            
-        # cv2.imshow("galaxy_2", image2)
-
-
         user_answer = submission.is_same_stars(image1, image2)
         if user_answer == answer:
             correct += 1
+
+
+        print("Правильный ответ:  ", answer, "Причина: ", reason)
+        print("Мой ответ:  ", user_answer)
+        print()
+        cv2.waitKey(10)
+
+
 
     total_object = len(data.index)
     print(f"Из {total_object} предсказаний верны {correct}")

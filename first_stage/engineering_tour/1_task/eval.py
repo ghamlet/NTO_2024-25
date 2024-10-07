@@ -20,5 +20,23 @@ def predict_illumination(image) -> bool:
     # TODO: Отредактируйте эту функцию по своему усмотрению.
     # Вы можете создавать собственные функции в этом файле, но все они должны вызываться внутри функции predict_illumination.
 
-    result = True
+    brightness_threshold=240
+    pixel_ratio_threshold=0.05
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Вычисление среднего значения яркости
+    average_brightness = np.mean(gray_image)
+
+    # Подсчет количества пикселей с яркостью выше порога
+    bright_pixels_count = np.sum(gray_image > brightness_threshold)
+    total_pixels = gray_image.size
+
+    # Процент пикселей с яркостью выше порога
+    bright_pixel_ratio = bright_pixels_count / total_pixels
+
+    # Оценка изображения
+    if bright_pixel_ratio > pixel_ratio_threshold:
+        result = False
+    else:
+        result = True
     return result
